@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="...">
+
+<!-- DataSource -->
+
+<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+
+<property name="driverClass" value="${jdbc.driverClassName}" />
+
+<property name="jdbcUrl" value="${jdbc.url}" />
+
+<property name="user" value="${jdbc.username}" />
+
+<property name="password" value="${jdbc.password}" />
+
+<property name="autoCommitOnClose" value="true" />
+
+<property name="checkoutTimeout" value="${cpool.checkoutTimeout}" />
+
+<property name="initialPoolSize" value="${cpool.minPoolSize}" />
+
+<property name="minPoolSize" value="${cpool.minPoolSize}" />
+
+<property name="maxPoolSize" value="${cpool.maxPoolSize}" />
+
+<property name="maxIdleTime" value="${cpool.maxIdleTime}" />
+
+<property name="acquireIncrement" value="${cpool.acquireIncrement}" />
+
+<!-- <property name="maxIdleTimeExcessConnections" value="${cpool.maxIdleTimeExcessConnections}"/> -->
+
+</bean>
+
+<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+
+<property name="locations">
+
+<value>classpath:jdbc.properties</value>
+
+</property>
+
+</bean>
+
+<!-- SessionFacotory -->
+
+<bean id="sessionFactory"
+
+class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+
+<property name="dataSource" ref="dataSource" />
+
+<property name="annotatedClasses">
+
+<list>
+
+<value>com.syx.compass.model.Article</value>
+
+<value>com.syx.compass.model.Author</value>
+
+<value>com.syx.compass.test1.Article</value>
+
+</list>
+
+</property>
+
+<property name="hibernateProperties">
+
+<props>
+
+<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+
+<prop key="hibernate.current_session_context_class">thread</prop>
+
+<prop key="javax.persistence.validation.mode">none</prop>
+
+<prop key="hibernate.show_sql">true</prop>
+
+<prop key="hibernate.format_sql">false</prop>
+
+<prop key="hibernate.hbm2ddl.auto">update</prop>
+
+</props>
+
+</property>
+
+</bean>
+
+<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+
+<property name="sessionFactory" ref="sessionFactory"></property>
+
+</bean>
+
+<bean id="txManager"
+
+class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+
+<property name="sessionFactory" ref="sessionFactory" />
+
+</bean>
+
+</beans>

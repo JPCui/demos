@@ -1,0 +1,17 @@
+log4j.rootLogger=DEBUG,console
+
+log4j.appender.console=org.apache.log4j.ConsoleAppender
+log4j.appender.console.Threshold=DEBUG
+log4j.appender.console.ImmediateFlush=true
+log4j.appender.console.Target=System.out
+log4j.appender.console.layout=org.apache.log4j.PatternLayout
+log4j.appender.console.layout.ConversionPattern=[%-5p] %d(%r) \u2013> [%t] %m %x %n
+
+log4j.appender.ERROR=org.apache.log4j.RollingFileAppender
+log4j.appender.ERROR.File=D:/zutnlp-data/logs/neo4j/error.log
+log4j.appender.ERROR.Append=true
+log4j.appender.ERROR.MaxFileSize=1MB
+log4j.appender.ERROR.MaxBackupIndex=100
+log4j.appender.ERROR.Threshold=ERROR
+log4j.appender.ERROR.layout=org.apache.log4j.PatternLayout 
+log4j.appender.ERROR.layout.ConversionPattern=[%-5p] %d(%r) %l \u2013> [%t] %m %x %n

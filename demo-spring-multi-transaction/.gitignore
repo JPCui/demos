@@ -1,0 +1,10 @@
+*
+!src
+!.settings
+!WebContent
+!.gitignore
+!.classpath
+!.project
+!README.md
+!pom.xml
+
